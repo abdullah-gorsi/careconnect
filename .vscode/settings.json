@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.gradle.kts": "kotlin",
+    "*.gradle": "groovy",
+    "build.gradle.kts": "kotlin",
+    "build.gradle": "groovy"
+  }
+}

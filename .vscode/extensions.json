@@ -1,0 +1,8 @@
+{
+  // Recommended extensions to improve Kotlin/Groovy/Gradle highlighting and editing
+  // Install these from the Extensions view (Ctrl+Shift+X) if you don't already have them.
+  "recommendations": [
+    "fwcd.kotlin",
+    "mrmlnc.vscode-groovy"
+  ]
+}

@@ -2,14 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'binding/initial_binding.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
@@ -26,6 +28,9 @@ void main() async {
     await Firebase.initializeApp();
   }
 
+  final preferences = await SharedPreferences.getInstance();
+  Get.put<ThemeController>(ThemeController(preferences), permanent: true);
+
   runApp(const CareConnectApp());
 }
 
@@ -34,13 +39,19 @@ class CareConnectApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'CareConnect',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      initialBinding: AppBindings(),
-      initialRoute: AppRoutes.splash,
-      getPages: AppRoutes.routes,
+    final themeController = Get.find<ThemeController>();
+
+    return Obx(
+      () => GetMaterialApp(
+        title: 'CareConnect',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: themeController.themeMode,
+        initialBinding: AppBindings(),
+        initialRoute: AppRoutes.splash,
+        getPages: AppRoutes.routes,
+      ),
     );
   }
 }

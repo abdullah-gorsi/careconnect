@@ -7,7 +7,7 @@ import '../viewmodels/signup_viewmodel.dart';
 import '../../../core/routes/app_routes.dart';
 
 /// Screen for new user registration.
-/// 
+///
 /// Features:
 /// - Role selection (Patient, Care partner, Clinician).
 /// - Comprehensive form for user details (Name, Email, Password, Phone).
@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
       _signupViewModel.setPhone(_phoneController.text.trim());
       _signupViewModel.setRole(_selectedRole);
       _signupViewModel.setReceiveUpdates(_updates);
-      
+
       await _signupViewModel.signUp();
     }
   }
@@ -91,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                
+
                 // Role Selection Card
                 GlassCard(
                   padding: const EdgeInsets.all(20),
@@ -126,7 +126,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                 onSelected: (selected) {
                                   setState(() => _selectedRole = role);
                                 },
-                                selectedColor: theme.colorScheme.primary.withValues(alpha: .15),
+                                selectedColor: theme.colorScheme.primary
+                                    .withValues(alpha: .15),
                                 checkmarkColor: theme.colorScheme.primary,
                                 labelStyle: TextStyle(
                                   color: _selectedRole == role
@@ -151,7 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Form Card
                 Container(
                   padding: const EdgeInsets.all(24),
@@ -178,7 +179,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        
+
                         // Full Name Field
                         TextFormField(
                           controller: _nameController,
@@ -204,7 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Email Field
                         TextFormField(
                           controller: _emailController,
@@ -231,7 +232,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Phone Field (Optional)
                         TextFormField(
                           controller: _phoneController,
@@ -246,11 +247,12 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             filled: true,
                             fillColor: Colors.grey[50],
-                            helperText: 'Optional - for important notifications',
+                            helperText:
+                                'Optional - for important notifications',
                           ),
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Password Field
                         TextFormField(
                           controller: _passwordController,
@@ -278,7 +280,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             filled: true,
                             fillColor: Colors.grey[50],
-                            helperText: 'Use 8+ characters with letters and numbers',
+                            helperText:
+                                'Use 8+ characters with letters and numbers',
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -295,70 +298,76 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-                        
+
                         // Terms and Privacy Checkbox
-                        Obx(() => Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: Checkbox(
-                                value: _signupViewModel.acceptedTerms,
-                                onChanged: (value) {
-                                  _signupViewModel.setAcceptedTerms(value ?? false);
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  _signupViewModel.setAcceptedTerms(
-                                    !_signupViewModel.acceptedTerms,
-                                  );
-                                },
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.grey[700],
-                                    ),
-                                    children: [
-                                      const TextSpan(text: 'I agree to the '),
-                                      TextSpan(
-                                        text: 'Privacy Policy',
-                                        style: TextStyle(
-                                          color: theme.colorScheme.primary,
-                                          fontWeight: FontWeight.w600,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                      const TextSpan(text: ' and '),
-                                      TextSpan(
-                                        text: 'Terms & Conditions',
-                                        style: TextStyle(
-                                          color: theme.colorScheme.primary,
-                                          fontWeight: FontWeight.w600,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ],
+                        Obx(
+                          () => Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: Checkbox(
+                                  value: _signupViewModel.acceptedTerms,
+                                  onChanged: (value) {
+                                    _signupViewModel.setAcceptedTerms(
+                                      value ?? false,
+                                    );
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _signupViewModel.setAcceptedTerms(
+                                      !_signupViewModel.acceptedTerms,
+                                    );
+                                  },
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(color: Colors.grey[700]),
+                                      children: [
+                                        const TextSpan(text: 'I agree to the '),
+                                        TextSpan(
+                                          text: 'Privacy Policy',
+                                          style: TextStyle(
+                                            color: theme.colorScheme.primary,
+                                            fontWeight: FontWeight.w600,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                        const TextSpan(text: ' and '),
+                                        TextSpan(
+                                          text: 'Terms & Conditions',
+                                          style: TextStyle(
+                                            color: theme.colorScheme.primary,
+                                            fontWeight: FontWeight.w600,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 16),
-                        
+
                         // Updates Switch
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
                           value: _updates,
-                          onChanged: (value) => setState(() => _updates = value),
+                          onChanged: (value) =>
+                              setState(() => _updates = value),
                           title: Text(
                             'Receive care tips & reminders',
                             style: theme.textTheme.bodyMedium?.copyWith(
@@ -371,46 +380,50 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: Colors.grey[600],
                             ),
                           ),
-                          activeColor: theme.colorScheme.primary,
+                          activeThumbColor: theme.colorScheme.primary,
                         ),
                         const SizedBox(height: 24),
-                        
+
                         // Submit Button
-                        Obx(() => SizedBox(
-                          width: double.infinity,
-                          height: 52,
-                          child: FilledButton(
-                            onPressed: _signupViewModel.isLoading ? null : _submit,
-                            style: FilledButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                        Obx(
+                          () => SizedBox(
+                            width: double.infinity,
+                            height: 52,
+                            child: FilledButton(
+                              onPressed: _signupViewModel.isLoading
+                                  ? null
+                                  : _submit,
+                              style: FilledButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                elevation: 0,
                               ),
-                              elevation: 0,
+                              child: _signupViewModel.isLoading
+                                  ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Create Account',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                             ),
-                            child: _signupViewModel.isLoading
-                                ? const SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                : const Text(
-                                    'Create Account',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
                           ),
-                        )),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Sign In Link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

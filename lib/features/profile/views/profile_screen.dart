@@ -12,7 +12,6 @@ class ProfileScreen extends StatelessWidget {
 
   void _showEditProfileDialog(BuildContext context, ProfileViewModel vm) {
     final profile = vm.userProfile.value;
-    if (profile == null) return;
 
     final nameController = TextEditingController(text: profile.name);
     final phoneController = TextEditingController(text: profile.phone);
@@ -126,15 +125,29 @@ class ProfileScreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-
-
         final profile = vm.userProfile.value;
 
         final contactDetails = [
-          _ProfileDetail(label: 'Email', value: profile.email, icon: Icons.mail_outline),
-          _ProfileDetail(label: 'Phone', value: profile.phone.isNotEmpty ? profile.phone : 'Not set', icon: Icons.phone_outlined),
-          const _ProfileDetail(label: 'Primary provider', value: 'Dr. Abdullah', icon: Icons.medical_services_outlined),
-          const _ProfileDetail(label: 'Care partner since', value: 'January 2022', icon: Icons.calendar_today_outlined),
+          _ProfileDetail(
+            label: 'Email',
+            value: profile.email,
+            icon: Icons.mail_outline,
+          ),
+          _ProfileDetail(
+            label: 'Phone',
+            value: profile.phone.isNotEmpty ? profile.phone : 'Not set',
+            icon: Icons.phone_outlined,
+          ),
+          const _ProfileDetail(
+            label: 'Primary provider',
+            value: 'Dr. Abdullah',
+            icon: Icons.medical_services_outlined,
+          ),
+          const _ProfileDetail(
+            label: 'Care partner since',
+            value: 'January 2022',
+            icon: Icons.calendar_today_outlined,
+          ),
         ];
 
         return ListView(
@@ -147,12 +160,18 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 38,
-                        backgroundColor: theme.colorScheme.primary.withValues(alpha: .1),
+                        backgroundColor: theme.colorScheme.primary.withValues(
+                          alpha: .1,
+                        ),
                         backgroundImage: (profile.photoUrl?.isNotEmpty ?? false)
                             ? NetworkImage(profile.photoUrl!)
                             : null,
                         child: (profile.photoUrl?.isEmpty ?? true)
-                            ? Icon(Icons.person, size: 36, color: theme.colorScheme.primary)
+                            ? Icon(
+                                Icons.person,
+                                size: 36,
+                                color: theme.colorScheme.primary,
+                              )
                             : null,
                       ),
                       Obx(() {
@@ -166,7 +185,9 @@ class ProfileScreen extends StatelessWidget {
                               child: const Center(
                                 child: CircularProgressIndicator(
                                   strokeWidth: 3,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -177,24 +198,29 @@ class ProfileScreen extends StatelessWidget {
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: Obx(() => GestureDetector(
-                          onTap: vm.isUploading.value
-                              ? null
-                              : () => _showImageSourceDialog(context, vm),
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.primary,
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Icon(
-                              Icons.camera_alt,
-                              size: 16,
-                              color: Colors.white,
+                        child: Obx(
+                          () => GestureDetector(
+                            onTap: vm.isUploading.value
+                                ? null
+                                : () => _showImageSourceDialog(context, vm),
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.primary,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.camera_alt,
+                                size: 16,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        )),
+                        ),
                       ),
                     ],
                   ),
@@ -203,9 +229,15 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(profile.name, style: theme.textTheme.headlineSmall),
+                        Text(
+                          profile.name,
+                          style: theme.textTheme.headlineSmall,
+                        ),
                         const SizedBox(height: 4),
-                        Text('${profile.role} · Family', style: theme.textTheme.bodyMedium),
+                        Text(
+                          '${profile.role} · Family',
+                          style: theme.textTheme.bodyMedium,
+                        ),
                         const SizedBox(height: 12),
                         Wrap(
                           spacing: 10,
@@ -221,7 +253,11 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 28),
-            SectionHeader(title: 'Care overview', actionLabel: 'View plan', onActionTap: () {}),
+            SectionHeader(
+              title: 'Care overview',
+              actionLabel: 'View plan',
+              onActionTap: () {},
+            ),
             const SizedBox(height: 12),
             Row(
               children: const [
@@ -264,8 +300,13 @@ class ProfileScreen extends StatelessWidget {
             Card(
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: theme.colorScheme.secondary.withValues(alpha: .15),
-                  child: Icon(Icons.group_outlined, color: theme.colorScheme.secondary),
+                  backgroundColor: theme.colorScheme.secondary.withValues(
+                    alpha: .15,
+                  ),
+                  child: Icon(
+                    Icons.group_outlined,
+                    color: theme.colorScheme.secondary,
+                  ),
                 ),
                 title: const Text('Invite a caregiver'),
                 subtitle: const Text('Share access and coordinate together'),
@@ -281,7 +322,12 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class _StatCard extends StatelessWidget {
-  const _StatCard({required this.label, required this.value, required this.detail, required this.icon});
+  const _StatCard({
+    required this.label,
+    required this.value,
+    required this.detail,
+    required this.icon,
+  });
 
   final String label;
   final String value;
@@ -314,10 +360,13 @@ class _StatCard extends StatelessWidget {
 }
 
 class _ProfileDetail {
-  const _ProfileDetail({required this.label, required this.value, required this.icon});
+  const _ProfileDetail({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
 
   final String label;
   final String value;
   final IconData icon;
 }
-

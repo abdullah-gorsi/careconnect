@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widgets/section_header.dart';
+import '../../../core/theme/theme_controller.dart';
 import '../../auth/viewmodels/auth_controller.dart';
-import '../../../core/routes/app_routes.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -16,12 +16,12 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifications = true;
-  bool _darkMode = false;
   bool _weeklySummary = true;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final themeController = Get.find<ThemeController>();
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: ListView(
@@ -54,11 +54,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _SettingCard(
             child: Column(
               children: [
-                SwitchListTile(
-                  value: _darkMode,
-                  title: const Text('Dark mode'),
-                  subtitle: const Text('Coming soon'),
-                  onChanged: (value) => setState(() => _darkMode = value),
+                Obx(
+                  () => SwitchListTile(
+                    secondary: Icon(
+                      themeController.isDarkMode.value
+                          ? Icons.dark_mode_outlined
+                          : Icons.light_mode_outlined,
+                    ),
+                    value: themeController.isDarkMode.value,
+                    title: const Text('Dark mode'),
+                    subtitle: Text(
+                      themeController.isDarkMode.value
+                          ? 'On for a softer night-time experience'
+                          : 'Use CareConnect in a darker color palette',
+                    ),
+                    onChanged: themeController.setDarkMode,
+                  ),
                 ),
                 const Divider(),
                 ListTile(
@@ -135,4 +146,3 @@ class _SettingCard extends StatelessWidget {
     );
   }
 }
-

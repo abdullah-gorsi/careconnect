@@ -96,11 +96,20 @@ class HealthTrackingScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Blood pressure', style: theme.textTheme.bodyMedium),
+                          Text(
+                            'Blood pressure',
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           const SizedBox(height: 8),
-                          Text('118/76 mmHg', style: theme.textTheme.headlineSmall),
+                          Text(
+                            '118/76 mmHg',
+                            style: theme.textTheme.headlineSmall,
+                          ),
                           const SizedBox(height: 6),
-                          Text('Last measured: today • 07:20', style: theme.textTheme.bodySmall),
+                          Text(
+                            'Last measured: today • 07:20',
+                            style: theme.textTheme.bodySmall,
+                          ),
                         ],
                       ),
                     ),
@@ -138,7 +147,10 @@ class HealthTrackingScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text('95 mg/dL', style: theme.textTheme.headlineSmall),
                     const SizedBox(height: 6),
-                    Text('Fasting • Today 06:50', style: theme.textTheme.bodySmall),
+                    Text(
+                      'Fasting • Today 06:50',
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
               ),
@@ -154,32 +166,47 @@ class HealthTrackingScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Steps (last 7 days)', style: theme.textTheme.bodyMedium),
+                    Text(
+                      'Steps (last 7 days)',
+                      style: theme.textTheme.bodyMedium,
+                    ),
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 60,
-                      child: Sparkline(data: steps, color: theme.colorScheme.primary),
+                      child: Sparkline(
+                        data: steps,
+                        color: theme.colorScheme.primary,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text('Sleep (hrs)', style: theme.textTheme.bodyMedium),
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 60,
-                      child: Sparkline(data: sleep, color: theme.colorScheme.secondary),
+                      child: Sparkline(
+                        data: sleep,
+                        color: theme.colorScheme.secondary,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text('Calories', style: theme.textTheme.bodyMedium),
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 60,
-                      child: Sparkline(data: calories, color: Colors.orangeAccent),
+                      child: Sparkline(
+                        data: calories,
+                        color: Colors.orangeAccent,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text('Hydration (L)', style: theme.textTheme.bodyMedium),
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 60,
-                      child: Sparkline(data: hydration, color: Colors.lightBlue),
+                      child: Sparkline(
+                        data: hydration,
+                        color: Colors.lightBlue,
+                      ),
                     ),
                   ],
                 ),
@@ -200,7 +227,8 @@ class HealthTrackingScreen extends StatelessWidget {
                         Expanded(
                           child: _AnalyticsTile(
                             label: 'Avg steps',
-                            value: '${(steps.reduce((a, b) => a + b) / steps.length).toInt()}',
+                            value:
+                                '${(steps.reduce((a, b) => a + b) / steps.length).toInt()}',
                             delta: '+8%',
                           ),
                         ),
@@ -208,7 +236,8 @@ class HealthTrackingScreen extends StatelessWidget {
                         Expanded(
                           child: _AnalyticsTile(
                             label: 'Avg sleep',
-                            value: '${(sleep.reduce((a, b) => a + b) / sleep.length).toStringAsFixed(1)}h',
+                            value:
+                                '${(sleep.reduce((a, b) => a + b) / sleep.length).toStringAsFixed(1)}h',
                             delta: '+3%',
                           ),
                         ),
@@ -216,7 +245,8 @@ class HealthTrackingScreen extends StatelessWidget {
                         Expanded(
                           child: _AnalyticsTile(
                             label: 'Avg hydration',
-                            value: '${(hydration.reduce((a, b) => a + b) / hydration.length).toStringAsFixed(1)}L',
+                            value:
+                                '${(hydration.reduce((a, b) => a + b) / hydration.length).toStringAsFixed(1)}L',
                             delta: '-1%',
                           ),
                         ),
@@ -265,7 +295,10 @@ class _MetricCard extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(color: color.withOpacity(.12), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(.12),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Icon(icon, color: color, size: 18),
                 ),
                 const SizedBox(width: 10),
@@ -274,13 +307,20 @@ class _MetricCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title, style: theme.textTheme.bodySmall, overflow: TextOverflow.ellipsis),
+                      Text(
+                        title,
+                        style: theme.textTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       const SizedBox(height: 4),
 
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         alignment: Alignment.centerLeft,
-                        child: Text(value, style: theme.textTheme.headlineSmall),
+                        child: Text(
+                          value,
+                          style: theme.textTheme.headlineSmall,
+                        ),
                       ),
                     ],
                   ),
@@ -295,7 +335,10 @@ class _MetricCard extends StatelessWidget {
               minHeight: 6,
             ),
             const SizedBox(height: 6),
-            Text('${(progress * 100).toInt()}% of goal', style: theme.textTheme.bodySmall),
+            Text(
+              '${(progress * 100).toInt()}% of goal',
+              style: theme.textTheme.bodySmall,
+            ),
           ],
         ),
       ),
@@ -304,7 +347,11 @@ class _MetricCard extends StatelessWidget {
 }
 
 class _AnalyticsTile extends StatelessWidget {
-  const _AnalyticsTile({required this.label, required this.value, required this.delta});
+  const _AnalyticsTile({
+    required this.label,
+    required this.value,
+    required this.delta,
+  });
   final String label;
   final String value;
   final String delta;
@@ -314,7 +361,10 @@ class _AnalyticsTile extends StatelessWidget {
     final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -322,7 +372,10 @@ class _AnalyticsTile extends StatelessWidget {
           const SizedBox(height: 6),
           Text(value, style: theme.textTheme.headlineSmall),
           const SizedBox(height: 6),
-          Text(delta, style: theme.textTheme.bodySmall?.copyWith(color: Colors.green)),
+          Text(
+            delta,
+            style: theme.textTheme.bodySmall?.copyWith(color: Colors.green),
+          ),
         ],
       ),
     );
@@ -380,7 +433,9 @@ class _SparklinePainter extends CustomPainter {
     }
 
     final path = Path()..moveTo(points.first.dx, points.first.dy);
-    for (var i = 1; i < points.length; i++) path.lineTo(points[i].dx, points[i].dy);
+    for (var i = 1; i < points.length; i++) {
+      path.lineTo(points[i].dx, points[i].dy);
+    }
 
     final fillPath = Path.from(path)
       ..lineTo(points.last.dx, size.height)
@@ -394,5 +449,6 @@ class _SparklinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _SparklinePainter oldDelegate) => oldDelegate.data != data || oldDelegate.color != color;
+  bool shouldRepaint(covariant _SparklinePainter oldDelegate) =>
+      oldDelegate.data != data || oldDelegate.color != color;
 }

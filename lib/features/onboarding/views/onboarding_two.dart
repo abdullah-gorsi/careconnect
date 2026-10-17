@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../shared/widgets/onboarding_shell.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../auth/views/login_screen.dart';
-import 'onboarding_three.dart';
 
 class OnboardingTwo extends StatelessWidget {
   const OnboardingTwo({super.key});
@@ -30,4 +28,3 @@ class OnboardingTwo extends StatelessWidget {
     );
   }
 }
-

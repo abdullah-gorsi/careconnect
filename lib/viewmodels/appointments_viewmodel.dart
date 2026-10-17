@@ -23,15 +23,20 @@ class AppointmentsViewModel extends GetxController {
   Future<void> loadAppointments() async {
     _isLoading.value = true;
     try {
-      final data = await service.fetchAppointments();
-      _appointments.value = data;
+      final data = service.fetchAppointments();
+      _appointments.value = data as List<AppointmentItem>;
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load appointments: $e', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Failed to load appointments: $e',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       _isLoading.value = false;
     }
   }
 
+  @override
   Future<void> refresh() async {
     await loadAppointments();
   }

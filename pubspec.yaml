@@ -39,6 +39,7 @@ dependencies:
   firebase_auth: ^6.1.2
   cloud_firestore: ^6.1.0
   get: ^4.6.6
+  shared_preferences: ^2.5.3
   http: ^1.2.0
   image_picker: ^1.2.1
   permission_handler: ^11.3.0

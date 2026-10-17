@@ -7,7 +7,6 @@ import '../../../shared/widgets/section_header.dart';
 import '../../appointments/views/appointments_screen.dart';
 import '../../messages/views/messages_screen.dart';
 import '../../profile/views/profile_screen.dart';
-import '../../settings/views/settings_screen.dart';
 import '../../health_tracking/views/health_tracking_screen.dart';
 import '../../../core/routes/app_routes.dart';
 
@@ -63,11 +62,26 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_outline), label: 'Health'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.event_available_outlined), label: 'Appointment'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: 'Chat'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_outline),
+            label: 'Health',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event_available_outlined),
+            label: 'Appointment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Chat',
+          ),
         ],
       ),
     );
@@ -126,7 +140,11 @@ class _HomeContent extends StatelessWidget {
         message: 'Labs look good. Keep hydration up this week.',
         time: '2h ago',
       ),
-      const _UpdateItem(source: 'Care team', message: 'New note added to your care plan.', time: 'Yesterday'),
+      const _UpdateItem(
+        source: 'Care team',
+        message: 'New note added to your care plan.',
+        time: 'Yesterday',
+      ),
     ];
 
     return SafeArea(
@@ -139,7 +157,10 @@ class _HomeContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Hi Abdullah', style: theme.textTheme.headlineSmall),
-                Text("Here's your care snapshot", style: theme.textTheme.bodySmall),
+                Text(
+                  "Here's your care snapshot",
+                  style: theme.textTheme.bodySmall,
+                ),
               ],
             ),
           ),
@@ -153,7 +174,10 @@ class _HomeContent extends StatelessWidget {
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [theme.colorScheme.primary, theme.colorScheme.secondary],
+                          colors: [
+                            theme.colorScheme.primary,
+                            theme.colorScheme.secondary,
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -166,23 +190,40 @@ class _HomeContent extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Health Index', style: theme.textTheme.bodyMedium),
-                          Text('8.6 / 10', style: theme.textTheme.headlineLarge),
+                          Text(
+                            'Health Index',
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            '8.6 / 10',
+                            style: theme.textTheme.headlineLarge,
+                          ),
                         ],
                       ),
                     ),
-                    TextButton(onPressed: () {}, child: const Text('View trends')),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('View trends'),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: const [
                     Expanded(
-                      child: _StatTile(label: 'Sleep', value: '7h 45m', trend: '+35m vs avg'),
+                      child: _StatTile(
+                        label: 'Sleep',
+                        value: '7h 45m',
+                        trend: '+35m vs avg',
+                      ),
                     ),
                     SizedBox(width: 12),
                     Expanded(
-                      child: _StatTile(label: 'Activity', value: '82%', trend: 'Goal on track'),
+                      child: _StatTile(
+                        label: 'Activity',
+                        value: '82%',
+                        trend: 'Goal on track',
+                      ),
                     ),
                   ],
                 ),
@@ -190,19 +231,30 @@ class _HomeContent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 28),
-          SectionHeader(title: 'Quick actions', actionLabel: 'See all', onActionTap: () {}),
+          SectionHeader(
+            title: 'Quick actions',
+            actionLabel: 'See all',
+            onActionTap: () {},
+          ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 16,
             runSpacing: 16,
             children: quickActions
                 .map(
-                  (action) => _QuickActionCard(data: action, onTap: () => Get.toNamed(action.route)),
+                  (action) => _QuickActionCard(
+                    data: action,
+                    onTap: () => Get.toNamed(action.route),
+                  ),
                 )
                 .toList(),
           ),
           const SizedBox(height: 32),
-          SectionHeader(title: 'Care reminders', actionLabel: 'Mark all done', onActionTap: () {}),
+          SectionHeader(
+            title: 'Care reminders',
+            actionLabel: 'Mark all done',
+            onActionTap: () {},
+          ),
           const SizedBox(height: 12),
           ...reminders.map(
             (reminder) => Padding(
@@ -220,7 +272,9 @@ class _HomeContent extends StatelessWidget {
           ...updates.map(
             (update) => Card(
               child: ListTile(
-                leading: CircleAvatar(child: Text(update.source.substring(0, 1))),
+                leading: CircleAvatar(
+                  child: Text(update.source.substring(0, 1)),
+                ),
                 title: Text(update.source),
                 subtitle: Text(update.message),
                 trailing: Text(update.time),
@@ -235,7 +289,12 @@ class _HomeContent extends StatelessWidget {
 }
 
 class _ActionCardData {
-  const _ActionCardData({required this.title, required this.icon, required this.color, required this.route});
+  const _ActionCardData({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.route,
+  });
   final String title;
   final IconData icon;
   final Color color;
@@ -254,13 +313,19 @@ class _QuickActionCard extends StatelessWidget {
       child: Container(
         width: (MediaQuery.of(context).size.width / 2) - 36,
         padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(color: data.color.withOpacity(0.08), borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(
+          color: data.color.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Icon(data.icon, color: data.color),
             ),
             const SizedBox(height: 16),
@@ -275,7 +340,11 @@ class _QuickActionCard extends StatelessWidget {
 }
 
 class _StatTile extends StatelessWidget {
-  const _StatTile({required this.label, required this.value, required this.trend});
+  const _StatTile({
+    required this.label,
+    required this.value,
+    required this.trend,
+  });
   final String label;
   final String value;
   final String trend;
@@ -296,7 +365,12 @@ class _StatTile extends StatelessWidget {
           const SizedBox(height: 6),
           Text(value, style: theme.textTheme.headlineSmall),
           const SizedBox(height: 4),
-          Text(trend, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary)),
+          Text(
+            trend,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
         ],
       ),
     );
@@ -304,7 +378,11 @@ class _StatTile extends StatelessWidget {
 }
 
 class _ReminderItem {
-  const _ReminderItem({required this.title, required this.time, required this.instructions});
+  const _ReminderItem({
+    required this.title,
+    required this.time,
+    required this.instructions,
+  });
   final String title;
   final String time;
   final String instructions;
@@ -325,16 +403,22 @@ class _ReminderCard extends StatelessWidget {
         ),
         title: Text(reminder.title),
         subtitle: Text('${reminder.time} • ${reminder.instructions}'),
-        trailing: IconButton(icon: const Icon(Icons.check_circle_outline), onPressed: () {}),
+        trailing: IconButton(
+          icon: const Icon(Icons.check_circle_outline),
+          onPressed: () {},
+        ),
       ),
     );
   }
 }
 
 class _UpdateItem {
-  const _UpdateItem({required this.source, required this.message, required this.time});
+  const _UpdateItem({
+    required this.source,
+    required this.message,
+    required this.time,
+  });
   final String source;
   final String message;
   final String time;
 }
-

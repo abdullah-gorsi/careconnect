@@ -1,18 +1,25 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 
 import '../core/services/appointments_service.dart';
-import '../models/appointment.dart';
+import '../core/services/auth_service.dart';
+import '../features/appointments/models/appointment.dart';
 
 class AppointmentsViewModel extends GetxController {
   final AppointmentsService service;
+  final AuthService authService;
 
-  AppointmentsViewModel({required this.service});
+  AppointmentsViewModel({required this.service, required this.authService});
 
   final RxList<AppointmentItem> _appointments = <AppointmentItem>[].obs;
   final RxBool _isLoading = false.obs;
+  StreamSubscription<List<AppointmentItem>>? _appointmentsSubscription;
 
   List<AppointmentItem> get appointments => _appointments;
   bool get isLoading => _isLoading.value;
+
+  String get _userId => authService.currentUser?.uid ?? '';
 
   @override
   void onInit() {
@@ -21,23 +28,38 @@ class AppointmentsViewModel extends GetxController {
   }
 
   Future<void> loadAppointments() async {
-    _isLoading.value = true;
-    try {
-      final data = service.fetchAppointments();
-      _appointments.value = data as List<AppointmentItem>;
-    } catch (e) {
+    if (_userId.isEmpty) {
       Get.snackbar(
         'Error',
-        'Failed to load appointments: $e',
+        'No user logged in',
         snackPosition: SnackPosition.BOTTOM,
       );
-    } finally {
-      _isLoading.value = false;
+      return;
     }
+
+    _isLoading.value = true;
+    await _appointmentsSubscription?.cancel();
+    _appointmentsSubscription = service
+        .fetchAppointments(_userId)
+        .listen(
+          (data) {
+            _appointments.value = data;
+            _isLoading.value = false;
+          },
+          onError: (error) {
+            _isLoading.value = false;
+            Get.snackbar(
+              'Error',
+              'Failed to load appointments: $error',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          },
+        );
   }
 
   @override
-  Future<void> refresh() async {
-    await loadAppointments();
+  void onClose() {
+    _appointmentsSubscription?.cancel();
+    super.onClose();
   }
 }
